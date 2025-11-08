@@ -1,13 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwij73es13242"]
+[gd_scene load_steps=3 format=3 uid="uid://cwij73es13242"]
 
 [ext_resource type="Script" uid="uid://chve7ppx17owm" path="res://node_3d.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bqogivbsvffa2" path="res://assets/models/mano_hand_cyborg.glb" id="2_0xm2m"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
-size = Vector3(0.1, 0.1, 0.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
-size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Node3D" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03921473, 0.0025952756, 0)
@@ -20,26 +14,18 @@ script = ExtResource("1_ig7tw")
 [node name="LeftController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"left_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController"]
-visible = false
-mesh = SubResource("BoxMesh_0xm2m")
-
 [node name="HandLeftRoot" type="Node3D" parent="XROrigin3D/LeftController"]
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/LeftController/HandLeftRoot" instance=ExtResource("2_0xm2m")]
-transform = Transform3D(-4.371139e-08, 0.9396926, 0.34202015, 0, 0.34202015, -0.9396926, -1, -4.1075268e-08, -1.4950176e-08, -0.4, -0.15, -0.45)
+transform = Transform3D(-0.034862373, 0.37444672, 0.13628747, -2.3920283e-08, 0.13680807, -0.37587705, -0.39847788, -0.03275992, -0.011923611, -0.02, -0.025, 0.035)
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController"]
-visible = false
-mesh = SubResource("BoxMesh_h2yge")
-
 [node name="HandRightRoot" type="Node3D" parent="XROrigin3D/RightController"]
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/RightController/HandRightRoot" instance=ExtResource("2_0xm2m")]
-transform = Transform3D(3.8439147e-08, -0.9396926, -0.34202015, -2.9900352e-08, 0.34202015, -0.9396926, -1, -4.634751e-08, 1.4950176e-08, 0.4, -0.15, -0.45)
+transform = Transform3D(-0.035941694, 0.010815307, -0.39823517, -0.034841087, 0.39823517, 0.013959798, -0.39685553, -0.035941713, 0.03484107, 0.02, -0.025, 0.035)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

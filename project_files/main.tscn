@@ -1,10 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwij73es13242"]
+[gd_scene load_steps=14 format=3 uid="uid://cwij73es13242"]
 
 [ext_resource type="Script" uid="uid://chve7ppx17owm" path="res://node_3d.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bqogivbsvffa2" path="res://assets/models/mano_hand_cyborg.glb" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://nfiqk33bayaj" path="res://right_controller.gd" id="3_h2yge"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lquwl"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.05
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0xm2m"]
 size = Vector2(20, 20)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h2yge"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
 size = Vector3(20, 0.1, 20)
@@ -48,11 +56,19 @@ transform = Transform3D(-0.034862373, 0.37444672, 0.13628747, -2.3920283e-08, 0.
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
+script = ExtResource("3_h2yge")
 
 [node name="HandRightRoot" type="Node3D" parent="XROrigin3D/RightController"]
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/RightController/HandRightRoot" instance=ExtResource("2_0xm2m")]
 transform = Transform3D(-0.035941694, 0.010815307, -0.39823517, -0.034841087, 0.39823517, 0.013959798, -0.39685553, -0.035941713, 0.03484107, 0.02, -0.025, 0.035)
+
+[node name="TeleportRay" type="RayCast3D" parent="XROrigin3D/RightController"]
+target_position = Vector3(0, 0, -10)
+
+[node name="TeleportMarker" type="MeshInstance3D" parent="XROrigin3D/RightController"]
+visible = false
+mesh = SubResource("CylinderMesh_lquwl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -67,6 +83,7 @@ text = "Enter VR"
 mesh = SubResource("PlaneMesh_0xm2m")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level"]
+physics_material_override = SubResource("PhysicsMaterial_h2yge")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D"]
 shape = SubResource("BoxShape3D_h2yge")
@@ -93,6 +110,12 @@ mesh = SubResource("CylinderMesh_1bvp3")
 shape = SubResource("CylinderShape3D_lquwl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 30, -10)
-light_energy = 9.948
-light_indirect_energy = 5.124
+transform = Transform3D(-0.57357645, -0.5792279, 0.5792279, 0, 0.70710677, 0.70710677, -0.819152, 0.4055798, -0.4055798, 15, 20, -15)
+light_energy = 3.02
+light_indirect_energy = 1.825
+light_volumetric_fog_energy = 2.319
+light_angular_distance = 2.78
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 0)
+light_size = 5.0

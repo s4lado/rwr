@@ -38,6 +38,30 @@ func teleport_now() -> void:
 		return
 	
 	
+	var target_pos = ray.get_collision_point()
+	
+	
+	var player_body = xr_origin.get_parent()
+	
+	if not player_body is CharacterBody3D:
+		print("Błąd: Rodzicem XROrigin nie jest CharacterBody3D!")
+		return
+
+	
+	
+	var origin_global_pos = player_body.global_position
+	var camera_global_pos = xr_camera.global_position
+	
+	var offset = origin_global_pos - camera_global_pos
+	offset.y = 0 
+	
+	
+	player_body.global_position = target_pos + offset + Vector3(0, 0.05, 0)
+	
+	
+	player_body.velocity = Vector3.ZERO
+	
+	
 	var target: Vector3 = ray.get_collision_point()
 	var origin_tf := xr_origin.global_transform
 	var cam_tf := xr_camera.global_transform
